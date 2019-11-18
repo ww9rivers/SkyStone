@@ -46,14 +46,19 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
-@TeleOp(name = "Concept: TensorFlow Object Detection", group = "Test")
+@TeleOp(name = "Test: TensorFlow Object Detection", group = "Test")
 public class TestObjectDetection extends LinearOpMode {
 
     private ObjectDetector detector = null;
 
     @Override
     public void runOpMode() {
-        detector = new ObjectDetector(this);
+        try {
+            detector = new ObjectDetector(this);
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+            return;
+        }
 
         /** Wait for the game to begin */
         telemetry.addData(">", "Press Play to start op mode");
@@ -65,6 +70,10 @@ public class TestObjectDetection extends LinearOpMode {
                 List<Recognition> updatedRecognitions = detector.detect();
             }
         }
-
+        try {
+            detector.finalize();
+        } catch (Throwable ex) {
+            ex.printStackTrace();
+        }
     }
 }
