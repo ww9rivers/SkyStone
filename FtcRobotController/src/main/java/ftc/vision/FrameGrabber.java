@@ -18,7 +18,7 @@ public class FrameGrabber implements CameraBridgeViewBase.CvCameraViewListener2 
 
     @Override
     public void onCameraViewStarted(int width, int height) {
-
+//  test
     }
 
     @Override
