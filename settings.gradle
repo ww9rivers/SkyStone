@@ -1,2 +1,2 @@
-include ':FtcRobotController'
+include ':FtcRobotController', ':ahrftc'
 include ':FTC13061'
