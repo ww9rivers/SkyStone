@@ -129,7 +129,7 @@ public class AutoDriveByEncoder_Linear extends LinearOpMode {
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
       //  encoderTurn(DRIVE_SPEED, -90);
-        encoderDrive(DRIVE_SPEED,  90, 60,  105.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  135, 60,  105.0);  // S1: Forward 47 Inches with 5 Sec timeout
 //        encoderDrive(TURN_SPEED,   90,12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
 //        encoderDrive(DRIVE_SPEED, 90,-25, -25, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
@@ -171,6 +171,13 @@ public class AutoDriveByEncoder_Linear extends LinearOpMode {
             newLeftRearTarget = leftFrontMotor.getCurrentPosition() - (int)((distanceInInches * COUNTS_PER_INCH)* Math.sin(robotAngle));
             newRightRearTarget = rightFrontMotor.getCurrentPosition() + (int)((distanceInInches * COUNTS_PER_INCH)* Math.cos(robotAngle));
 
+            telemetry.addData("newPos",  "Running to %7d: %7d: %7d: %7d", newLeftFrontTarget,
+                    newRightFrontTarget,
+                    newLeftRearTarget,
+                    newRightRearTarget);
+            telemetry.update();
+
+
             leftFrontMotor.setTargetPosition(newLeftFrontTarget);
             rightFrontMotor.setTargetPosition(newRightFrontTarget);
             leftRearMotor.setTargetPosition(newLeftRearTarget);
@@ -197,7 +204,7 @@ public class AutoDriveByEncoder_Linear extends LinearOpMode {
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
             while (opModeIsActive() &&
                    (runtime.seconds() < timeoutS) &&
-                   (leftFrontMotor.isBusy() && rightFrontMotor.isBusy())) {
+                (leftFrontMotor.isBusy() || rightFrontMotor.isBusy() || leftRearMotor.isBusy() || rightRearMotor.isBusy())){
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d: %7f", (int)distanceInInches,  angle);
@@ -206,6 +213,7 @@ public class AutoDriveByEncoder_Linear extends LinearOpMode {
                                             rightFrontMotor.getCurrentPosition());
                 telemetry.update();
             }
+
 
             // Stop all motion;
             leftFrontMotor.setPower(0);

@@ -1,2 +1,3 @@
 include ':FtcRobotController', ':ahrftc'
 include ':FTC13061'
+include ':openCVLibrary343'
