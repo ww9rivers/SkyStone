@@ -1,3 +1,12 @@
 [submodule "FTC13061"]
 	path = FTC13061
 	url = git@github.com:ww9rivers/skystone-ftc13061.git
+[submodule "openCVLibrary"]
+	path = openCVLibrary
+	url = git@github.com:ww9rivers/openCVLibrary.git
+[submodule "OpenCV-android-sdk"]
+	path = OpenCV-android-sdk
+	url = git@github.com:ww9rivers/OpenCV-android-sdk.git
+[submodule "ahrftc"]
+	path = ahrftc
+	url = git@github.com:ww9rivers/ahrftc.git
